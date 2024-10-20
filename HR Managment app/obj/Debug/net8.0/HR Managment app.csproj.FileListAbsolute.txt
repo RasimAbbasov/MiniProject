@@ -1,0 +1,15 @@
+C:\Users\Rasim\source\repos\HR Managment app\bin\Debug\net8.0\HR Managment app.exe
+C:\Users\Rasim\source\repos\HR Managment app\bin\Debug\net8.0\HR Managment app.deps.json
+C:\Users\Rasim\source\repos\HR Managment app\bin\Debug\net8.0\HR Managment app.runtimeconfig.json
+C:\Users\Rasim\source\repos\HR Managment app\bin\Debug\net8.0\HR Managment app.dll
+C:\Users\Rasim\source\repos\HR Managment app\bin\Debug\net8.0\HR Managment app.pdb
+C:\Users\Rasim\source\repos\HR Managment app\obj\Debug\net8.0\HR Managment app.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Rasim\source\repos\HR Managment app\obj\Debug\net8.0\HR Managment app.AssemblyInfoInputs.cache
+C:\Users\Rasim\source\repos\HR Managment app\obj\Debug\net8.0\HR Managment app.AssemblyInfo.cs
+C:\Users\Rasim\source\repos\HR Managment app\obj\Debug\net8.0\HR Managment app.csproj.CoreCompileInputs.cache
+C:\Users\Rasim\source\repos\HR Managment app\obj\Debug\net8.0\HR Managment app.sourcelink.json
+C:\Users\Rasim\source\repos\HR Managment app\obj\Debug\net8.0\HR Managment app.dll
+C:\Users\Rasim\source\repos\HR Managment app\obj\Debug\net8.0\refint\HR Managment app.dll
+C:\Users\Rasim\source\repos\HR Managment app\obj\Debug\net8.0\HR Managment app.pdb
+C:\Users\Rasim\source\repos\HR Managment app\obj\Debug\net8.0\HR Managment app.genruntimeconfig.cache
+C:\Users\Rasim\source\repos\HR Managment app\obj\Debug\net8.0\ref\HR Managment app.dll
