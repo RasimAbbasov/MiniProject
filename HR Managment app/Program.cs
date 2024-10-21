@@ -7,15 +7,13 @@ namespace HR_Managment_app
         static void Main(string[] args)
         {
             HumanResourceManager humanResourceManager = new HumanResourceManager();
-            //Employee employee01 = new Employee("502", "Seymur", "Junior backend", 300);
-            humanResourceManager.AddDepartment("department1", 3, 500);
-            humanResourceManager.AddDepartment("department3", 3, 500);
-            humanResourceManager.AddDepartment("department2", 3, 500);
+            humanResourceManager.AddDepartment("department1", 1, 1000);
+            humanResourceManager.AddDepartment("department3", 2, 2000);
+            humanResourceManager.AddDepartment("department2", 3, 5000);
 
-            //humanResourceManager.AddEmployee(employee01, "department1");
-            Console.WriteLine(humanResourceManager.GetDepartments());
-            //humanResourceManager.EditDepartments(department3, "Department 23");
-
+            humanResourceManager.GetDepartments();
+            humanResourceManager.EditDepartments("department1","NEW NAME");
+            humanResourceManager.GetDepartments();
         }
     }
 }

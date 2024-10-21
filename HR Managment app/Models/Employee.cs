@@ -6,35 +6,19 @@ namespace HR_Managment_app.Models
     {
         public string No { get; set; }
         public string FullName { get; set; }
-
-        private string _position;
-        public string Position
-        {
-            get => _position;
-            set
-            {
-                if (value.Length < 2)
-                    throw new ArgumentException("Position minimum 2 hərfdən ibarət olmalıdır.");
-                _position = value;
-            }
-        }
-        private decimal _salary;
-        public decimal Salary 
-        {
-            get => _salary;
-            set 
-            {
-                if (value < 250)  throw new ArgumentException("Salary minimum 250-den asagi ola bilmez");
-                _salary = value;      
-            }
-        }
+        public string Position { get; set; }
+        public decimal Salary { get; set; }
         public string DepartmentName { get; set; }
         public Employee(string no,string fullname,string postion,decimal salary)
         {
+            if (salary < 250)
+                throw new ArgumentException("Salary 250-den az ola bilmez.");
+            if (Position.Length < 2)
+                throw new ArgumentException("Position 2-den az herfden az ola bilmez.");
             No = no;
             FullName = fullname;
-            _position = postion;
-            _salary = salary;
+            Position = postion;
+            Salary = salary;
         }
 
     }

@@ -2,6 +2,6 @@
 {
     internal interface IHumanResourceManager
     {
-         List<Department> Departments { get; set; }
+         List<Department> Departments { get; }
     }
 }

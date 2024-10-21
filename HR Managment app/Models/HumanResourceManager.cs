@@ -1,43 +1,41 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace HR_Managment_app.Models
+﻿namespace HR_Managment_app.Models
 {
     internal class HumanResourceManager : IHumanResourceManager
     {
 
-        public List<Department> Departments { get; set; }
-        public HumanResourceManager()
-        {
-            Departments = new List<Department>();
-        }
+        public List<Department> Departments{ get; }=new List<Department>();
         public void AddDepartment(string departmentName, int workerlimit, decimal salarylimit)
         {
             if (departmentName.Length < 2) throw new ArgumentException("Department name 2-den az herfden ibaret ola bilmez");
             Department department = new Department(departmentName, workerlimit, salarylimit);
-            department.Name = departmentName;
-            department.WorkerLimit = workerlimit;
-            department.SalaryLimits = salarylimit;
             Departments.Add(department);
-
         }
-        public List<Department> GetDepartments()
+        public void GetDepartments()
         {
-            return Departments;
+            foreach (var item in Departments)
+            {
+                Console.WriteLine($"Department Name:{item.Name} Worker limit:{item.WorkerLimit} Salary limit:{item.SalaryLimits}");
+            }
         }
 
-        public void EditDepartments(Department department, string name)
-        {
-            if (department == null) throw new ArgumentNullException();
-            department.Name = name;
-        }
+        //public void EditDepartments(string name1, string name2)
+        //{
+        //    //if (department == null) throw new ArgumentNullException();
+        //    //department.Name = name;
+        //    if(name2.Length<2) throw new ArgumentNullException("name cant be null");
+        //    foreach (var item in Departments) 
+        //    {
+        //     if(item.Name == name1) 
+        //        {
+        //            name1 = name2;
+        //        }
+        //    }
+
+        //}
         public void EditDepartments(string departmentname, string name)
         {
-            var editname=Departments.Find(x => x.Name.ToLower()==name.ToLower());
-            if (editname == null) throw new ArgumentNullException();
+            var editname=Departments.Find(x => x.Name.ToLower()==departmentname.ToLower());
+            if (editname == null) { throw new ArgumentNullException(); }
             editname.Name = name;
         }
         public void AddEmployee(Employee employee,string departmentname)
