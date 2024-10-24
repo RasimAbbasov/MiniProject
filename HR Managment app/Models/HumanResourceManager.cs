@@ -1,13 +1,16 @@
-﻿namespace HR_Managment_app.Models
+﻿using System.ComponentModel.Design;
+using System.Threading.Channels;
+using System.Xml.Linq;
+
+namespace HR_Managment_app.Models
 {
     internal class HumanResourceManager : IHumanResourceManager
     {
 
-        public List<Department> Departments{ get; }=new List<Department>();
-        public void AddDepartment(string departmentName, int workerlimit, decimal salarylimit)
+        public List<Department> Departments{ get; private set; } =new List<Department>();
+        public void AddDepartment(string departmentname, int workerlimit, decimal salarylimit)
         {
-            if (departmentName.Length < 2) throw new ArgumentException("Department name 2-den az herfden ibaret ola bilmez");
-            Department department = new Department(departmentName, workerlimit, salarylimit);
+            Department department = new Department(departmentname, workerlimit, salarylimit);
             Departments.Add(department);
         }
         public void GetDepartments()
@@ -17,6 +20,15 @@
                 Console.WriteLine($"Department Name:{item.Name} Worker limit:{item.WorkerLimit} Salary limit:{item.SalaryLimits}");
             }
         }
+
+        //public List<Department> GetDepartments()
+        //{
+        //    foreach (var department in Departments) 
+        //    {
+        //        return department.Name;
+        //    }
+        //    retuwrn null;
+        //}
 
         //public void EditDepartments(string name1, string name2)
         //{
@@ -38,20 +50,33 @@
             if (editname == null) { throw new ArgumentNullException(); }
             editname.Name = name;
         }
-        public void AddEmployee(Employee employee,string departmentname)
+        public void AddEmployee(string fullname, string position, decimal salary, string departmentname)
         {
-            
-            var existing=Departments.Find(c => c.Name == departmentname);
-            if (existing == null) { throw new ArgumentNullException(); }
-             existing.Employees.Add(employee);
+            var department = Departments.FirstOrDefault(d => d.Name.Equals(departmentname, StringComparison.OrdinalIgnoreCase));
+            if (department == null) { throw new ArgumentNullException(); }
+            Employee employee = new Employee(fullname, position, salary, departmentname);
+            department.Employees.Add(employee);
         }
+
+        //public void AddEmployee(string No,string fullname, string position, decimal salary, string departmentname)
+        //{
+        //    if (fullname.Length < 2) throw new ArgumentException("FullName 2-den az herfden ibaret ola bilmez");
+        //    Employee employee = new Employee(No, fullname, position,salary,departmentname);
+        //    Employees.Add(employee);
+        //}
         public void RemoveEmployee(string employeeNo, string departmentname) 
         {
-            var existing = Departments.Find(c => c.Name == departmentname);
-            var removeEmployee=existing.Employees.Find(x=>x.No==employeeNo);
-            if (existing == null || removeEmployee ==null ) { throw new ArgumentNullException("Tapilmadi"); }
-            existing.Employees.Remove(removeEmployee);
-
+            var department = Departments.FirstOrDefault(d => d.Name.Equals(departmentname, StringComparison.OrdinalIgnoreCase));
+            if (department != null)
+            {
+                var employee = department.Employees.FirstOrDefault(e => e.No.Equals(employeeNo));
+                if (employee != null)
+                    department.Employees.Remove(employee);
+                else
+                {
+                    throw new ArgumentException("Employee tapilmadi");
+                }
+            }
         }
         public void EditEmployee(string no, decimal salary, string position)
         {
@@ -74,11 +99,21 @@
         }
         public void Search(string name)
         {
-            foreach (var item in Departments.SelectMany(d => d.Employees)) 
+            var foundEmployees = Departments.SelectMany(d => d.Employees)
+                                      .Where(e => e.FullName.Contains(name, StringComparison.OrdinalIgnoreCase))
+                                      .ToList();
+
+            if (foundEmployees.Count == 0)
             {
-                if(item.FullName.Contains(name))
-                Console.WriteLine(item);
-            }    
+                Console.WriteLine("Employee not found!");
+                return;
+            }
+
+            Console.WriteLine("Founded employees:");
+            foreach (var employee in foundEmployees)
+            {
+                Console.WriteLine($"Employee No:{employee.No}, Ad: {employee.FullName}, Position: {employee.Position}, Salary: {employee.Salary}, Departament: {employee.DepartmentName}");
+            }
         }
     }
 }
