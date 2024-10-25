@@ -10,7 +10,7 @@ namespace HR_Managment_app.Models
         public List<Department> Departments{ get; private set; } =new List<Department>();
         public void AddDepartment(string departmentname, int workerlimit, decimal salarylimit)
         {
-            Department department = new Department(departmentname, workerlimit, salarylimit);
+            var department = new Department(departmentname, workerlimit, salarylimit);
             Departments.Add(department);
         }
         public void GetDepartments()
@@ -23,12 +23,9 @@ namespace HR_Managment_app.Models
 
         //public List<Department> GetDepartments()
         //{
-        //    foreach (var department in Departments) 
-        //    {
-        //        return department.Name;
-        //    }
-        //    retuwrn null;
+        //    return Departments;
         //}
+
 
         //public void EditDepartments(string name1, string name2)
         //{
@@ -64,12 +61,12 @@ namespace HR_Managment_app.Models
         //    Employee employee = new Employee(No, fullname, position,salary,departmentname);
         //    Employees.Add(employee);
         //}
-        public void RemoveEmployee(string employeeNo, string departmentname) 
+        public void RemoveEmployee(string name, string departmentname) 
         {
             var department = Departments.FirstOrDefault(d => d.Name.Equals(departmentname, StringComparison.OrdinalIgnoreCase));
             if (department != null)
             {
-                var employee = department.Employees.FirstOrDefault(e => e.No.Equals(employeeNo));
+                var employee = department.Employees.FirstOrDefault(e => e.FullName.Equals(name, StringComparison.OrdinalIgnoreCase));
                 if (employee != null)
                     department.Employees.Remove(employee);
                 else
@@ -78,16 +75,15 @@ namespace HR_Managment_app.Models
                 }
             }
         }
-        public void EditEmployee(string no, decimal salary, string position)
+        public void EditEmployee(string name, string position,decimal salary)
         {
             if (salary < 250) 
                throw new ArgumentException("Salary minimum 250-den asagi ola bilmez");
             if (position.Length < 2)
                 throw new ArgumentException("Position minimum 2 hərfdən ibarət olmalıdır.");
-            Employee employee;
             foreach (var department in Departments)
             {
-                employee = department.Employees.Find(x => x.No == no);
+                var employee = department.Employees.FirstOrDefault(x => x.FullName.Equals(name,StringComparison.OrdinalIgnoreCase));
                 if (employee == null)
                 {
                     throw new ArgumentException("No uygun deyil");
@@ -95,7 +91,6 @@ namespace HR_Managment_app.Models
                 employee.Position = position;
                 employee.Salary = salary;
             }
-           
         }
         public void Search(string name)
         {
@@ -105,14 +100,14 @@ namespace HR_Managment_app.Models
 
             if (foundEmployees.Count == 0)
             {
-                Console.WriteLine("Employee not found!");
+                Console.WriteLine("Employee tapilmadi!");
                 return;
             }
 
             Console.WriteLine("Founded employees:");
             foreach (var employee in foundEmployees)
             {
-                Console.WriteLine($"Employee No:{employee.No}, Ad: {employee.FullName}, Position: {employee.Position}, Salary: {employee.Salary}, Departament: {employee.DepartmentName}");
+                Console.WriteLine($"Employee No:{employee.No}, Ad: {employee.FullName}, Position: {employee.Position}, Salary: {employee.Salary}, Department: {employee.DepartmentName}");
             }
         }
     }

@@ -7,8 +7,8 @@
         void GetDepartments();
         void EditDepartments(string name, string newname);
         void AddEmployee(string fullname, string position, decimal salary, string departmentname);
-        void RemoveEmployee(string employeeno, string departmentName);
-        void EditEmployee(string employeeno, decimal salary, string position);
+        void RemoveEmployee(string name, string departmentName);
+        void EditEmployee(string employeeno, string position,decimal salary);
         void Search(string name);
     }
 }

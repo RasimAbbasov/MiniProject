@@ -8,7 +8,7 @@ namespace HR_Managment_app.Models
         public string Name { get; set; }
         public int WorkerLimit { get; set; }
         public decimal SalaryLimits { get; set; }
-        public List<Employee> Employees;
+        public List<Employee> Employees { get; private set; } = new List<Employee>();
         public Department(string name,int workerlimit,decimal salaryLimits)
         {
             if (name.Length < 2)
@@ -18,7 +18,6 @@ namespace HR_Managment_app.Models
             Name = name;
             WorkerLimit = workerlimit;
             SalaryLimits=salaryLimits;
-            Employees = new List<Employee>();
         }
         public void CalcSalaryAverage()
         {
