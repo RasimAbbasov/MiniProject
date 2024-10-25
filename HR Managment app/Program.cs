@@ -7,24 +7,23 @@ namespace HR_Managment_app
         static void Main(string[] args)
         {
             HumanResourceManager humanResourceManager = new HumanResourceManager();
-            humanResourceManager.AddDepartment("department1", 1, 1000);
-            humanResourceManager.AddDepartment("department3", 2, 2000);
-            humanResourceManager.AddDepartment("department2", 3, 5000);
-
-
+            humanResourceManager.AddDepartment("IT Security", 1, 1000);
+            humanResourceManager.AddDepartment("Tech Support", 2, 2000);
+            humanResourceManager.AddDepartment("Web Development", 3, 5000);
+            Console.WriteLine("--------------------------------------------------");
             humanResourceManager.GetDepartments();
-            humanResourceManager.EditDepartments("department1","department0010");
-            humanResourceManager.AddEmployee("Rasim Abbasov","Backend",300,"department2");
-            //humanResourceManager.EditEmployee("Rasim Abbasov","Frontend", 100000);
+            Console.WriteLine("--------------------------------------------------");
+            humanResourceManager.EditDepartments("Tech Support","Data Management");
+            Console.WriteLine("--------------------------------------------------");
+            humanResourceManager.AddEmployee("Rasim Abbasov", "Backend Intern", 4000,"Web Development");
+            Console.WriteLine("--------------------------------------------------");
             humanResourceManager.Search("R");
-
-            humanResourceManager.RemoveEmployee("Rasim Abbasov", "department2");
-            humanResourceManager.Search("R");
-
+            Console.WriteLine("--------------------------------------------------");
+            humanResourceManager.EditEmployee("WE1001", "Frontend Intern", 3000);
+            Console.WriteLine("--------------------------------------------------");
+            humanResourceManager.Search("r");
+            Console.WriteLine("--------------------------------------------------");
             humanResourceManager.GetDepartments();
-            //editemployee zamani employeeNo islemir,probleme cevrilib.
-            //employee'ye No-yu elave etmek lazimdir
-
         }
     }
 }

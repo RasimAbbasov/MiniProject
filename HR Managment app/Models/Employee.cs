@@ -1,5 +1,6 @@
 ﻿using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace HR_Managment_app.Models
 {
@@ -13,22 +14,23 @@ namespace HR_Managment_app.Models
         public string Position { get; set; }
         public decimal Salary { get; set; }
         public string DepartmentName { get; set; }
-        public Employee(string fullname,string position,decimal salary,string departmentname)
+        public Employee(string no,string fullname,string position,decimal salary,string departmentname)
         {
             if (salary < 250)
-                throw new ArgumentException("Salary 250-den az ola bilmez.");
+                throw new ArgumentException("Salary must be more than 250 ");
             if (position.Length < 2)
                 throw new ArgumentException("Position 2-den az herfden az ola bilmez.");
-
-            //No = $"{DepartmentName.Substring(0, 2).ToUpper()}{employeecounter++}";
+            if(!IsValidEmployeeNumber(no))
+                throw new ArgumentException("Invalid employee number format.");
+            No = no;
             FullName = fullname;
             Position = position;
             Salary = salary;
             DepartmentName = departmentname;
         }
-        public static bool IsValidEmployeeNumber(string employeeNumber)
+        private bool IsValidEmployeeNumber(string number)
         {
-            return employeeNumberRegex.IsMatch(employeeNumber);
+            return Regex.IsMatch(number, @"^[A-Z]{2}\d{4}$");
         }
 
     }

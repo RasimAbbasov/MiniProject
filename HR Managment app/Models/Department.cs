@@ -1,7 +1,4 @@
-﻿using System.Linq.Expressions;
-using System.Numerics;
-
-namespace HR_Managment_app.Models
+﻿namespace HR_Managment_app.Models
 {
     public class Department
     {
@@ -12,9 +9,9 @@ namespace HR_Managment_app.Models
         public Department(string name,int workerlimit,decimal salaryLimits)
         {
             if (name.Length < 2)
-                throw new ArgumentException("Department 2-den cox olmalidir");
+                throw new ArgumentException("Department must be more than 2!");
             if (salaryLimits < 250)
-                throw new ArgumentException("Salary limits 250-den yuxari olmalidir");
+                throw new ArgumentException("Salary limits must be more than 250!");
             Name = name;
             WorkerLimit = workerlimit;
             SalaryLimits=salaryLimits;
